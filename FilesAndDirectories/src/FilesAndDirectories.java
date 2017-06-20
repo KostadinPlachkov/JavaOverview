@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by Kostadin on 19-Jun-17.
- */
 public class FilesAndDirectories {
 
     public static void main(String[] args) {
