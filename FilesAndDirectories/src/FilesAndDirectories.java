@@ -47,9 +47,32 @@ public class FilesAndDirectories {
             e.printStackTrace();
         }
 
-        File file = new File(inputFile);
+        File file = new File(inputFile);  // File
 
         // Serialization
+        String pathToSerFile = "object.ser";
+        Cube cube = new Cube();
+        cube.color = "black";
+        cube.depth = 10;
+        cube.height = 12;
+        cube.width = 11;
 
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream(pathToSerFile))) {
+            objectOutputStream.writeObject(cube);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(
+                new FileInputStream(pathToSerFile))) {
+            Cube loadedCube = (Cube) objectInputStream.readObject();
+            System.out.println(loadedCube.color);
+            System.out.println(loadedCube.width);
+            System.out.println(loadedCube.height);
+            System.out.println(loadedCube.depth);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
