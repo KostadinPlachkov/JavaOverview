@@ -11,7 +11,7 @@ public class RegularExpressions {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
         Integer counter = 0;
-        while (matcher.find()){
+        while (matcher.find()) {
             counter++;
         }
         System.out.println("Matches: " + counter);
@@ -26,7 +26,7 @@ public class RegularExpressions {
         text = "Text with regex from 2017 and lines 64.";
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(text);
-        while (matcher.find()){
+        while (matcher.find()) {
             System.out.println(matcher.group());
         }
 
@@ -35,7 +35,7 @@ public class RegularExpressions {
         text = "Text with \"regex\" from \"2017\" and lines 64.";
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(text);
-        while (matcher.find()){
+        while (matcher.find()) {
             System.out.println(matcher.group());
         }
 
@@ -46,11 +46,48 @@ public class RegularExpressions {
         text = "+359-999-9999-9999\n+98 8844 4545\n+359 9999 9999 9999";
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(text);
-        while (matcher.find()){
+        while (matcher.find()) {
             System.out.println(matcher.group());
         }
 
         // Anchors
+        // ^ - at the start
+        // $ - at the end
+        regex = "^\\w{6,20}$";
+        text = "maya_lekova ";
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(text);
+        if (matcher.find())
+            System.out.format("Valid name: \"%s\"\n", text);
+        else
+            System.out.format("Invalid name: \"%s\"\n", text);
+
+        // Grouping Constructs
+        regex = "(\\d{2})-(\\w{3})-(\\d{4})";
+        text = "15-Jan-2017";
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(text);
+        if (matcher.find()){
+            System.out.println("Valid date: " + text);
+            System.out.println("Date: " + matcher.group(1));
+            System.out.println("Month: " + matcher.group(2));
+            System.out.println("Year: " + matcher.group(3));
+        }
+        else
+            System.out.println("Invalid date: " + text);
+
+        // Back reference constructs
+        regex = "\\d{2}(-|\\/)\\w{3}\\1\\d{4}";
+//      regex = "\\d{2}(?<del>-|\\/)\\w{3}\\k<del>\\d{4}";
+        text = "15-Jan/2017";
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(text);
+        if (matcher.find()){
+            System.out.println("Valid date: " + text);
+        }
+        else
+            System.out.println("Invalid date: " + text);
+
 
     }
 }
