@@ -54,6 +54,7 @@ public class FilesAndDirectories {
         cube.height = 12;
         cube.width = 11;
 
+		// Write
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(pathToSerFile))) {
             objectOutputStream.writeObject(cube);
@@ -61,6 +62,7 @@ public class FilesAndDirectories {
             e.printStackTrace();
         }
 
+		// Read
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(pathToSerFile))) {
             Cube loadedCube = (Cube) objectInputStream.readObject();
